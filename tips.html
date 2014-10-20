@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crime Trends Map</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="vendor/jQuery/mobile/jquery.mobile-1.4.4.css"/>
+    <script src="vendor/jQuery/jquery-1.11.1.min.js"></script>
+    <script src="vendor/jQuery/mobile/jquery.mobile-1.4.4.js"></script>
+    <script type="text/javascript">
+        // Define a click binding for all anchors in the page
+//        $("a").on("click", function (event) {
+//
+//            // Prevent the usual navigation behavior
+//            event.preventDefault();
+//
+//            // Alter the url according to the anchor's href attribute, and
+//            // store the data-foo attribute information with the url
+//            $.mobile.navigate($(this).attr("href"), {
+//                foo: $(this).attr("data-foo")
+//            });
+//
+//            // Hypothetical content alteration based on the url. E.g, make
+//            // an Ajax request for JSON data and render a template into the page.
+//            alterContent($(this).attr("href"));
+//        });
+        //        $(document).on("mobileinit", function () {
+        //            $(document).delegate("statistics.html", "pageinit", function () {
+        //                alert('A page with an id of "aboutPage" was just created by jQuery Mobile!');
+        //            });
+        //        });
+
+        //        $(document).on("pagebeforecreate", function (event) {
+        //            alert("触发 pagebeforecreate 事件！");
+        //        });
+        //        $(document).on("pagecreate", function (event) {
+        //            alert("触发 pagecreate 事件！");
+        //        });
+        //        $(document).on("pageinit", function (event) {
+        //            alert("触发 pageinit 事件！")
+        //        });
+        //        $(document).delegate("statistics.html", "pageinit", function (event) {
+        //            alert('A page with an id of "aboutPage" was just created by jQuery Mobile!');
+        //        });
+//        $(document).on("pageshow", "statistics.html", function () { // 当进入页面二时
+//            alert("现在显示页面二");
+//        });
+        $(function () {
+            alert("hey tips ya")
+        })
+    </script>
+</head>
+<body>
+
+<div data-role="page">
+
+    <div data-role="header">
+        <h1>Tip</h1>
+    </div>
+    <!-- /header -->
+
+    <div role="main" class="ui-content">
+        <script type="text/javascript">
+//            alert("hey tip")
+            //            $(document).bind("pageshow",
+            //                    function (e) {
+            //                        // script here
+            //                        alert("i am index")
+            //                    }
+            //            );
+            //            $(document).bind("pageshow",
+            //                    function (e) {
+            //                        // script here
+            //                        alert("i am index")
+            //                    }
+            //            );
+        </script>
+        <p>Page content goes here.</p>
+    </div>
+    <!-- /content -->
+
+    <div data-role="footer" data-position="fixed">
+        <div data-role="navbar" role="navigation">
+            <ul>
+                <li><a href="index.html" data-icon="grid"  rel="external">Crimes</a></li>
+                <li><a href="statistics.html" data-icon="star" rel="external">Statistics</a></li>
+                <li><a href="tips.html" data-icon="gear" class="ui-btn-active" rel="external">Tips</a></li>
+                <li><a href="#" data-icon="clock">Trends</a></li>
+            </ul>
+        </div>
+        <!-- /navbar -->
+    </div>
+    <!-- /footer -->
+</div>
+<!-- /page -->
+
+</body>
+</html>

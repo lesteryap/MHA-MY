@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Crime Trends Map</title>
+
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Include the compiled Ratchet CSS -->
+    <link href="vendor/Ratchet/css/ratchet.css" rel="stylesheet">
+    <link href="css/mha.css" rel="stylesheet">
+
+    <script src="vendor/jQuery/jquery-1.11.1.min.js"></script>
+    <script src="vendor/jQuery/mobile/jquery.mobile-1.4.4.js"></script>
+
+    <!-- Include the compiled Ratchet JS -->
+    <script src="vendor/Ratchet/js/ratchet.js"></script>
+    <script src="vendor/Ratchet/js/fingerblast.js"></script>
+
+    <script type='text/javascript'>
+        $(function () {
+            var fb = new FingerBlast('body');
+
+            $("#form_submit_button").on("tap", function () {
+                console.log('hey');
+                var name = document.forms["register"]["name"].value;
+                var email = document.forms["register"]["email"].value;
+                var password = document.forms["register"]["password"].value;
+                var confirmPass = document.forms["register"]["confirm"].value;
+                var NPC = $("#NPC").val();
+
+                var postValues = {"fullname": name, "email": email, "password": password,
+                    "confirmPass": confirmPass, "NPC": NPC};
+                var alertText = "There is a problem: \n\n";
+                var text = "";
+
+                for (i in postValues) {
+                    if (postValues[i] == null || postValues[i] == "") {
+                        text = i + " is not filled in \n";
+                        alertText = alertText.concat(text);
+                    }
+                }
+
+                if (!RE_EMAIL.test(email)) {
+                    alertText += "\n------------------\n Invalid email format";
+                }
+                if (password != confirmPass) {
+                    alertText += "\nThe two password entries are different";
+                }
+                if (password.length <= 5) {
+                    alertText += "\n Password at least 6 character";
+                }
+                if($("#NPC").val()==0){
+                    alertText += "\n Please select an option in the NPC field";
+                }
+                if (alertText.length > 22) {
+                    alert(alertText);
+                    return false;
+                } else {
+                    postData = postValues;
+                    $.ajax({
+                        type: "POST",
+                        url: "http://im.someline.com/mha/register.php",
+                        data: postData,
+                        dataType: "JSON",
+                        cache: false,
+                        success: function (data) {
+                            console.log(data);
+                            alert(data);
+                            console.log(postData);
+                        }
+                    });
+                }
+
+            })
+
+            $.ajax({
+                type: "POST",
+                url: "http://im.someline.com/mha/npc.php",
+                dataType: "JSON",
+                cache: false,
+                success: function (data) {
+                    $("#data").empty();
+                    console.log(data);///////
+                    $("#NPC").append("<option value='0'>select a NPC...</option>");
+                    for (i = 0; i < data.length; i++) {
+                        $("#NPC").append("<option value='" +
+                                data[i].id + "'>" +
+                                data[i].name + "</option>");
+                    }
+                    $("#data").trigger('change');
+                }
+            });
+
+            var RE_EMAIL = /^(\w+[\-\.])*\w+@(\w+\.)+[A-Za-z]+$/;
+
+
+            // everything above this line..
+        });
+    </script>
+</head>
+<body id="MHA">
+
+<!-- Make sure all your bars are the first things in your <body> -->
+<header class="bar bar-nav">
+    <a class="icon icon-left pull-left" href="settings.html" data-transition="slide-out"></a>
+    <a class="btn pull-right" href="login.html" data-transition="slide-in">
+        Login
+    </a>
+
+    <h1 class="title">Register</h1>
+</header>
+
+<!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+<div class="content">
+    <div class="content-padded">
+        <form name="register">
+            <input type="text" name="email" placeholder="Email">
+            <input type="text" name="name" placeholder="Full Name">
+            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="confirm" placeholder="Confirm Password">
+
+            <select id="NPC">
+            </select>
+
+
+            <button id="form_submit_button" class="btn btn-positive btn-block">Register</button>
+        </form>
+
+    </div>
+</div>
+
+<nav class="bar bar-tab">
+    <a class="tab-item active" href="index.html">
+        <span class="icon icon-crimes"></span>
+        <span class="tab-label">Crimes</span>
+    </a>
+    <a class="tab-item" href="statistics.html">
+        <span class="icon icon-statistics"></span>
+        <span class="tab-label">Statistics</span>
+    </a>
+    <a class="tab-item" href="tips.html">
+        <span class="icon icon-tips"></span>
+        <span class="tab-label">Tips</span>
+    </a>
+    <a class="tab-item" href="trends.html">
+        <span class="icon icon-trends"></span>
+        <span class="tab-label">Trends</span>
+    </a>
+</nav>
+
+</body>
+</html>
